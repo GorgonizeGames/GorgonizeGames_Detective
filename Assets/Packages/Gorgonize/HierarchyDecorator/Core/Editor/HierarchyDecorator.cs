@@ -40,7 +40,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
             EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyGUI;
             EditorApplication.hierarchyChanged += InvalidateCache;
 
-            // Custom header colors'ï¿½ yï¿½kle
+            // Custom header colors'ý yükle
             LoadCustomHeaderColors();
 
             _isInitialized = true;
@@ -139,7 +139,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
             }
             catch (System.Exception ex)
             {
-                Debug.LogException(ex);
+                // Silent error handling
             }
         }
 
@@ -274,7 +274,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
 
             _customHeaderColors.Clear();
 
-            // EditorPrefs'den kayï¿½tlï¿½ header isimlerini al
+            // EditorPrefs'den kayýtlý header isimlerini al
             string savedHeaders = EditorPrefs.GetString("HierarchyDecorator.CustomHeaderNames", "");
 
             if (!string.IsNullOrEmpty(savedHeaders))
@@ -284,7 +284,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
                 {
                     if (string.IsNullOrEmpty(headerName)) continue;
 
-                    // Her header iï¿½in renk bilgisini yï¿½kle
+                    // Her header için renk bilgisini yükle
                     string colorKey = $"HierarchyDecorator.HeaderColor.{headerName}";
                     string colorString = EditorPrefs.GetString(colorKey, "");
 
@@ -307,11 +307,11 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
         /// </summary>
         private static void SaveCustomHeaderColors()
         {
-            // Header isimlerini birleï¿½tirip kaydet
+            // Header isimlerini birleþtirip kaydet
             string headerNames = string.Join("|", _customHeaderColors.Keys);
             EditorPrefs.SetString("HierarchyDecorator.CustomHeaderNames", headerNames);
 
-            // Her rengi ayrï¿½ ayrï¿½ kaydet
+            // Her rengi ayrý ayrý kaydet
             foreach (var kvp in _customHeaderColors)
             {
                 string colorKey = $"HierarchyDecorator.HeaderColor.{kvp.Key}";
@@ -329,7 +329,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
         /// </summary>
         private static Color GetCustomHeaderColor(string headerName)
         {
-            LoadCustomHeaderColors(); // ï¿½lk ï¿½aï¿½rï¿½da renkleri yï¿½kle
+            LoadCustomHeaderColors(); // Ýlk çaðrýda renkleri yükle
 
             string cleanName = headerName.Replace(_settings?.HeaderPrefix ?? "---", "").Trim();
             return _customHeaderColors.TryGetValue(cleanName, out var color) ? color : Color.clear;
@@ -340,12 +340,12 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
         /// </summary>
         public static void SetCustomHeaderColor(string headerName, Color color)
         {
-            LoadCustomHeaderColors(); // ï¿½nce mevcut renkleri yï¿½kle
+            LoadCustomHeaderColors(); // Önce mevcut renkleri yükle
 
             string cleanName = headerName.Replace(_settings?.HeaderPrefix ?? "---", "").Trim();
             _customHeaderColors[cleanName] = color;
 
-            SaveCustomHeaderColors(); // Deï¿½iï¿½iklikleri kaydet
+            SaveCustomHeaderColors(); // Deðiþiklikleri kaydet
             EditorApplication.RepaintHierarchyWindow();
         }
 
@@ -354,7 +354,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
         /// </summary>
         public static void RemoveCustomHeaderColor(string headerName)
         {
-            LoadCustomHeaderColors(); // ï¿½nce mevcut renkleri yï¿½kle
+            LoadCustomHeaderColors(); // Önce mevcut renkleri yükle
 
             string cleanName = headerName.Replace(_settings?.HeaderPrefix ?? "---", "").Trim();
 
@@ -364,7 +364,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
                 string colorKey = $"HierarchyDecorator.HeaderColor.{cleanName}";
                 EditorPrefs.DeleteKey(colorKey);
 
-                SaveCustomHeaderColors(); // Deï¿½iï¿½iklikleri kaydet
+                SaveCustomHeaderColors(); // Deðiþiklikleri kaydet
                 EditorApplication.RepaintHierarchyWindow();
             }
         }
@@ -376,7 +376,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
         {
             LoadCustomHeaderColors();
 
-            // Tï¿½m kayï¿½tlï¿½ header renklerini EditorPrefs'den sil
+            // Tüm kayýtlý header renklerini EditorPrefs'den sil
             foreach (string headerName in _customHeaderColors.Keys)
             {
                 string colorKey = $"HierarchyDecorator.HeaderColor.{headerName}";
@@ -807,7 +807,6 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
             EditorGUILayout.EndScrollView();
         }
 
-        [System.Obsolete]
         private void RefreshHeaderList()
         {
             _headerObjects.Clear();
@@ -828,7 +827,7 @@ namespace Gorgonize.Plugins.HierarchyDecorator.Core.Editor
 
         private void ResetAllHeaderColors()
         {
-            // Tï¿½m custom renkleri temizle
+            // Tüm custom renkleri temizle
             HierarchyDecorator.ClearAllCustomHeaderColors();
             Repaint();
         }
