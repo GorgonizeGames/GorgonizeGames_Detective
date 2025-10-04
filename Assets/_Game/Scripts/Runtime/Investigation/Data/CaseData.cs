@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Game.Runtime.Investigation
+namespace Game.Runtime.Investigation.Data
 {
     [CreateAssetMenu(fileName = "New Case", menuName = "Game/Investigation/Case")]
     public class CaseData : ScriptableObject

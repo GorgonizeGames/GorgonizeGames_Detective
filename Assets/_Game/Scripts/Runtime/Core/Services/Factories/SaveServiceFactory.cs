@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Runtime.Core.Services
+namespace Game.Runtime.Core.Services.Factories
 {
     public static class SaveServiceFactory
     {

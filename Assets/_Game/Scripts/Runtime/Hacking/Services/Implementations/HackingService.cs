@@ -5,8 +5,9 @@ using Game.Runtime.Core.DI;
 using Game.Runtime.Core.Services;
 using Game.Runtime.Core.Events;
 using Game.Runtime.Investigation;
+using Game.Runtime.Hacking.Services;
 
-namespace Game.Runtime.Hacking
+namespace Game.Runtime.Hacking.Services
 {
     public class HackingService : MonoBehaviour, IHackingService
     {

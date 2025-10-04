@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Runtime.Investigation
+namespace Game.Runtime.Investigation.Data
 {
     [CreateAssetMenu(fileName = "New Character", menuName = "Game/Investigation/Character")]
     public class CharacterData : ScriptableObject

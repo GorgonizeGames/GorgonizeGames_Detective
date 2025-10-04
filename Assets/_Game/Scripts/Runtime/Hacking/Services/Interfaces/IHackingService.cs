@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Game.Runtime.Hacking
+namespace Game.Runtime.Hacking.Services
 {
     public interface IHackingService
     {
