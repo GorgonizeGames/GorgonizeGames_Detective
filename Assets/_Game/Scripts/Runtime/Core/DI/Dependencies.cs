@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Core.DI
 {
-public static class Dependencies
+    public static class Dependencies
     {
         private static readonly object _lock = new object();
         private static DIContainer _container;
@@ -26,21 +26,21 @@ public static class Dependencies
                 return _container;
             }
         }
-
-        public static void Inject(UnityEngine.MonoBehaviour obj)
+        
+        public static void Inject(MonoBehaviour obj)
         {
             if (obj == null)
             {
-                UnityEngine.Debug.LogError("Cannot inject dependencies into null object");
+                Debug.LogError("Cannot inject dependencies into null object");
                 return;
             }
-
+            
             try
             {
                 var fields = obj.GetType().GetFields(
-                    System.Reflection.BindingFlags.NonPublic | 
-                    System.Reflection.BindingFlags.Instance);
-
+                    BindingFlags.NonPublic | 
+                    BindingFlags.Instance);
+                
                 foreach (var field in fields)
                 {
                     var injectAttr = field.GetCustomAttribute<InjectAttribute>();
@@ -55,27 +55,25 @@ public static class Dependencies
                                 field.SetValue(obj, service);
                             }
                         }
-                        catch (System.Reflection.TargetInvocationException e)
+                        catch (TargetInvocationException e)
                         {
-                            // Extract the inner exception for better error reporting
                             var innerException = e.InnerException ?? e;
-                            UnityEngine.Debug.LogError($"Failed to inject dependency for field '{field.Name}' in '{obj.GetType().Name}': {innerException.Message}", obj);
+                            Debug.LogError($"Failed to inject dependency for field '{field.Name}' in '{obj.GetType().Name}': {innerException.Message}", obj);
                         }
                         catch (Exception e)
                         {
-                            UnityEngine.Debug.LogError($"Failed to inject dependency for field '{field.Name}' in '{obj.GetType().Name}': {e.Message}", obj);
+                            Debug.LogError($"Failed to inject dependency for field '{field.Name}' in '{obj.GetType().Name}': {e.Message}", obj);
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogError($"Failed to inject dependencies into '{obj.GetType().Name}': {e.Message}", obj);
+                Debug.LogError($"Failed to inject dependencies into '{obj.GetType().Name}': {e.Message}", obj);
             }
         }
-
-        // Convenience method for safe dependency resolution
-        public static bool TryInject(UnityEngine.MonoBehaviour obj)
+        
+        public static bool TryInject(MonoBehaviour obj)
         {
             try
             {
@@ -88,9 +86,9 @@ public static class Dependencies
             }
         }
     }
-
-    [System.AttributeUsage(System.AttributeTargets.Field)]
-    public class InjectAttribute : System.Attribute 
+    
+    [AttributeUsage(AttributeTargets.Field)]
+    public class InjectAttribute : Attribute 
     {
         public bool Required { get; set; } = true;
         
@@ -100,4 +98,3 @@ public static class Dependencies
         }
     }
 }
-
