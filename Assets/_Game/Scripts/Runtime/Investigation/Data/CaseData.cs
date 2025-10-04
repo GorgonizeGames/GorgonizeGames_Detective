@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Game.Runtime.Investigation.Services;
 
 namespace Game.Runtime.Investigation.Data
 {

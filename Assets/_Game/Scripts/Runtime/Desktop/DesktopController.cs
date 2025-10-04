@@ -3,9 +3,8 @@ using UnityEngine.UI;
 using Game.Runtime.Core.DI;
 using Game.Runtime.Core.Services;
 using Game.Runtime.UI.Windows;
-using Game.Runtime.Investigation;
-using Game.Runtime.Hacking;
 using Game.Runtime.Core.Events;
+using Game.Runtime.Investigation.Services;
 
 namespace Game.Runtime.Desktop
 {

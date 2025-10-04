@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Game.Runtime.Investigation
+namespace Game.Runtime.Investigation.Services
 {
     public interface IEvidenceService
     {

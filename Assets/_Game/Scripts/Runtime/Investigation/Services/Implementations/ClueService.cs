@@ -6,7 +6,7 @@ using Game.Runtime.Core.DI;
 using Game.Runtime.Core.Services;
 using Game.Runtime.Core.Events;
 
-namespace Game.Runtime.Investigation
+namespace Game.Runtime.Investigation.Services
 {
     public class ClueService : MonoBehaviour, IClueService
     {
